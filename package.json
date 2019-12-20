@@ -4,7 +4,7 @@
   "description": "Literally epic authenticator.",
   "main": "src/index.js",
   "scripts": {
-    "test": "cd src && node entry.js"
+    "launch": "cd src && node entry.js"
   },
   "author": "zxv77",
   "license": "MIT",
