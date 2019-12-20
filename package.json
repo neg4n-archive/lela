@@ -1,0 +1,24 @@
+{
+  "name": "lea",
+  "version": "1.0.0",
+  "description": "Literally epic authenticator.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "cd src && node entry.ts"
+  },
+  "author": "zxv77",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  },
+  "dependencies": {
+    "@types/node": "^12.12.20",
+    "otplib": "^11.0.1",
+    "systeminformation": "^4.16.0"
+  }
+}
