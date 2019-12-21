@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
@@ -29,16 +31,16 @@ if (!fs.existsSync(accountsPath)) {
 const accounts = require(accountsPath)
 
 if (!args[0]) {
-  console.log('\n')
+  console.log('')
   for (const account of accounts.database) {
     console.log(`${(JSON.stringify(colors).indexOf(account.name)) > -1 ? chalk.hex(colorsDatabase.checkKey(account.name)).bold(account.name) : chalk.bold(account.name)}: ${authenticator.generate(account.secret)}`)
   }
-  console.log('\n')
+  console.log('')
 } else {
   try {
     const requiredCommand = require(path.join(__dirname, 'commands', args[0].replace('/', '')))
     requiredCommand.action(args, accounts, accountsPath)
   } catch (error) {
-    console.log('Invalid argument.')
+    console.log('invalid argument.')
   }
 }
