@@ -1,5 +1,5 @@
 
-**lea** - literally epic authenticator.  
+**lela** - literally epic linux authenticator.  
 lightweight command line tool  
 with purpose of generating  
 one-time passwords in your  

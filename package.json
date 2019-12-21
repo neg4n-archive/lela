@@ -1,11 +1,11 @@
 {
-  "name": "lea",
+  "name": "lela",
   "version": "1.0.0",
-  "description": "Literally epic authenticator.",
+  "description": "literally epic linux authenticator.",
   "main": "src/entry.js",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/zxv77/lea.git"
+    "type": "git",
+    "url": "https://github.com/zxv77/lela.git"
   },
   "keywords": [
     "cli",
@@ -18,7 +18,7 @@
     "launch": "node src/entry.js"
   },
   "bin": {
-    "lea": "src/entry.js"
+    "lela": "src/entry.js"
   },
   "author": "zxv77",
   "license": "MIT",

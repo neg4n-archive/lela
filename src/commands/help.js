@@ -1,6 +1,6 @@
 module.exports.action = () => {
   console.log('\n')
-  console.log('lea - literally epic authenticator')
+  console.log('lela - literally epic linux authenticator')
   console.log('by zxv77 (github.com/zxv77)')
   console.log('\n')
   console.log('commands:')

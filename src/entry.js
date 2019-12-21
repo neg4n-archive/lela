@@ -12,14 +12,14 @@ authenticator.options = { crypto }
 const args = process.argv.slice(2)
 const homeDirectory = require('os').homedir()
 
-const leaPath = path.join(homeDirectory, '.lea')
-const accountsPath = path.join(leaPath, 'accounts.json')
+const lelaPath = path.join(homeDirectory, '.lela')
+const accountsPath = path.join(lelaPath, 'accounts.json')
 
 const colors = require(path.join(__dirname, '..', 'colors.json'))
 const colorsDatabase = jsonFind(colors)
 
-if (!fs.existsSync(leaPath)) {
-  fs.mkdirSync(leaPath)
+if (!fs.existsSync(lelaPath)) {
+  fs.mkdirSync(lelaPath)
 }
 if (!fs.existsSync(accountsPath)) {
   const defaultAccounts = {
