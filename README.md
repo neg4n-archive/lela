@@ -9,7 +9,7 @@ ___
 * Easiness to use
 * Colors support
 * Minimalistic code
-* An cookie 🍪
+* A cookie 🍪
 
 ### How to use
 To install lela, simply do:
