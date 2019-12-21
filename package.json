@@ -1,6 +1,6 @@
 {
   "name": "lela",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "literally epic linux authenticator.",
   "main": "src/entry.js",
   "repository": {
