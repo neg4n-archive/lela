@@ -1,5 +1,5 @@
 
-**lea** - **l**iterally **e**pic **a**uthenticator.  
+**lea** - literally epic authenticator.  
 lightweight command line tool  
 with purpose of generating  
 one-time passwords in your  
