@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
+const util = require('util')
 const path = require('path')
 const crypto = require('crypto')
 const chalk = require('chalk')
@@ -16,35 +17,39 @@ const lelaPath = path.join(homeDirectory, '.lela')
 const accountsPath = path.join(lelaPath, 'accounts.json')
 
 const colors = require(path.join(__dirname, '..', 'colors.json'))
-const colorsDatabase = jsonFind(colors)
+const colorsDatabase = jsonFind(colors);
 
-if (!fs.existsSync(lelaPath)) {
-  fs.mkdirSync(lelaPath)
-}
-if (!fs.existsSync(accountsPath)) {
-  const defaultAccounts = {
-    database: []
-  }
-  fs.writeFileSync(accountsPath, JSON.stringify(defaultAccounts))
-}
+(async function entry () {
+  await util.promisify(fs.access)(lelaPath, fs.F_OK).catch(async error => {
+    if (error.code === 'ENOENT') {
+      await util.promisify(fs.mkdir)(lelaPath)
+    }
+  })
+  await util.promisify(fs.access)(accountsPath).catch(async error => {
+    if (error.code === 'ENOENT') {
+      const defaultAccounts = []
+      await util.promisify(fs.writeFile)(accountsPath, JSON.stringify(defaultAccounts))
+    }
+  })
 
-const accounts = require(accountsPath)
+  const accounts = JSON.parse(await util.promisify(fs.readFile)(accountsPath))
 
-if (!args[0]) {
-  if (accounts.database.length === 0) {
-    console.log('there are no accounts in lela\'s database.')
-    process.exit(1)
+  if (!args[0]) {
+    if (accounts.length === 0) {
+      return console.log('there are no accounts in lela\'s database.')
+    }
+    process.stdout.write('\n')
+    for (const account of accounts) {
+      console.log(`${(JSON.stringify(colors).indexOf(account.name)) > -1 ? chalk.hex(colorsDatabase.checkKey(account.name)).bold(account.name) : chalk.bold(account.name)}: ${authenticator.generate(account.secret)}`)
+    }
+    process.stdout.write('\n')
+  } else {
+    try {
+      const requiredCommand = require(path.join(__dirname, 'commands', args[0].replace('/', '')))
+      requiredCommand.action(args[1], accounts, accountsPath)
+    } catch (error) {
+      console.log('invalid argument.')
+    }
   }
-  console.log('')
-  for (const account of accounts.database) {
-    console.log(`${(JSON.stringify(colors).indexOf(account.name)) > -1 ? chalk.hex(colorsDatabase.checkKey(account.name)).bold(account.name) : chalk.bold(account.name)}: ${authenticator.generate(account.secret)}`)
-  }
-  console.log('')
-} else {
-  try {
-    const requiredCommand = require(path.join(__dirname, 'commands', args[0].replace('/', '')))
-    requiredCommand.action(args, accounts, accountsPath)
-  } catch (error) {
-    console.log('invalid argument.')
-  }
-}
+  return 0
+})()

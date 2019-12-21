@@ -7,6 +7,7 @@ ___
 **lela** is a lightweight command line tool with purpose of generating one-time passwords in your terminal in minimalistic and elegant way. Here are list of main lela features:
 
 * Easiness to use
+* Asynchronicity
 * Colors support
 * Minimalistic code
 * A cookie 🍪
