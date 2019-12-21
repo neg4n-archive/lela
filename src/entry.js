@@ -31,6 +31,10 @@ if (!fs.existsSync(accountsPath)) {
 const accounts = require(accountsPath)
 
 if (!args[0]) {
+  if (accounts.database.length === 0) {
+    console.log('there are no accounts in lela\'s database.')
+    process.exit(1)
+  }
   console.log('')
   for (const account of accounts.database) {
     console.log(`${(JSON.stringify(colors).indexOf(account.name)) > -1 ? chalk.hex(colorsDatabase.checkKey(account.name)).bold(account.name) : chalk.bold(account.name)}: ${authenticator.generate(account.secret)}`)
