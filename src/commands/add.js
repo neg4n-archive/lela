@@ -1,5 +1,5 @@
-const readline = require('readline')
 const util = require('util')
+const prompt = require('prompt')
 
 const utils = require('../utils')
 
@@ -7,25 +7,29 @@ module.exports.action = async function (accountName, accountsDatabase, accountsP
   if (!accountName) {
     return console.log('missing account name.')
   }
+
   for (const account of accountsDatabase) {
     if (account.name === accountName) {
       return console.log('this account already exists')
     }
   }
-  const readLine = readline.createInterface({ input: process.stdin, output: process.stdout })
 
-  readLine.question[util.promisify.custom] = (question) => {
-    return new Promise((resolve) => {
-      readLine.question(question, resolve)
+  prompt.start()
+  prompt.message = ''
+  prompt.delimiter = ''
+  prompt.colors = false
+
+  await util.promisify(prompt.get)({
+    name: 'secret',
+    description: 'enter your secret:',
+    replace: '*',
+    hidden: true
+  }).then(result => {
+    accountsDatabase.push({
+      name: accountName,
+      secret: result.secret.replace(/ /g, '')
     })
-  }
-
-  const answer = await util.promisify(readLine.question)('secret: ')
-
-  accountsDatabase.push({
-    name: accountName.replace(/ /g, ''),
-    secret: answer
   })
+
   await utils.updateDatabase(accountsDatabase, accountsPath)
-  readLine.close()
 }

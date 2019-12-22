@@ -33,6 +33,7 @@
   "dependencies": {
     "chalk": "^3.0.0",
     "json-find": "^2.0.7",
-    "otplib": "^11.0.1"
+    "otplib": "^11.0.1",
+    "prompt": "^1.0.0"
   }
 }
