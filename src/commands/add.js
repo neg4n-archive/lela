@@ -5,12 +5,12 @@ const utils = require('../utils')
 
 module.exports.action = async function (accountName, accountsDatabase, accountsPath) {
   if (!accountName) {
-    return console.log('missing account name.')
+    return console.log('\nMissing account name.\n')
   }
 
   for (const account of accountsDatabase) {
     if (account.name === accountName) {
-      return console.log('this account already exists')
+      return console.log('\nThis account already exists\n')
     }
   }
 
@@ -21,7 +21,7 @@ module.exports.action = async function (accountName, accountsDatabase, accountsP
 
   await util.promisify(prompt.get)({
     name: 'secret',
-    description: 'enter your secret:',
+    description: 'Enter your secret:',
     replace: '*',
     hidden: true
   }).then(result => {

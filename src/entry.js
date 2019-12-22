@@ -36,7 +36,7 @@ const colorsDatabase = jsonFind(colors);
 
   if (!args[0]) {
     if (accounts.length === 0) {
-      return console.log('there are no accounts in lela\'s database.')
+      return console.log('\nThere are no accounts in lela\'s database.\n')
     }
     process.stdout.write('\n')
     for (const account of accounts) {
@@ -48,7 +48,7 @@ const colorsDatabase = jsonFind(colors);
       const requiredCommand = require(path.join(__dirname, 'commands', args[0].replace('/', '')))
       requiredCommand.action(args[1], accounts, accountsPath)
     } catch (error) {
-      console.log('invalid argument.')
+      console.log('\nInvalid parameter.\nConsider doing: lela /help\n')
     }
   }
   return 0
